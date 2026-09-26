@@ -1,3 +1,19 @@
+# Telco Churn Predictor
+
+🔗 **Live demo:** https://capstone-project-sk-churn-ui.vercel.app
+
+🔗 **API:** https://capstone-project-sk-churn-api.onrender.com
+
+🔗 **API docs:** https://capstone-project-sk-churn-api.onrender.com/docs
+
+
+**Stack:** scikit-learn (LogisticRegression) · FastAPI on Render · React (Vite) on Vercel
+
+> ⚠️ Free tier: backend spins down after 15 min of inactivity. First request may take ~50s.
+
+---
+
+
 # Telco Customer Churn — ML Capstone
 
 Predict which customers are likely to churn so retention can act early.
