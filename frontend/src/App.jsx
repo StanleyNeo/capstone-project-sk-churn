@@ -1,8 +1,8 @@
 // Day 10: Churn risk widget.
-// Form -> gateway (5000) -> FastAPI (5001) -> model -> probability + verdict.
+// Form -> FastAPI (Render) -> model -> probability + verdict. Added
 import { useState } from "react";
 
-const GATEWAY = "http://localhost:5000";
+const API = import.meta.env.VITE_API_URL || "http://localhost:5001"; //const GATEWAY = "http://localhost:5000";
 
 // 13 fields the UI doesn't surface — sent with sane defaults so the API
 // still receives the full 19-feature payload.
@@ -52,7 +52,7 @@ export default function App() {
       payload.MonthlyCharges = Number(payload.MonthlyCharges);
       payload.TotalCharges = Number(payload.TotalCharges);
 
-      const r = await fetch(`${GATEWAY}/api/predict`, {
+      const r = await fetch(`${API}/predict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -71,12 +71,12 @@ export default function App() {
     result?.verdict === "high" ? "#dc2626"
     : result?.verdict === "medium" ? "#d97706"
     : "#16a34a";
-
+        // Logistic Regression · ROC-AUC 0.84 · served via FastAPI (5001) behind an Express gateway (5000)
   return (
     <div style={S.page}>
       <h1 style={S.h1}>Churn Risk Estimator</h1>
       <p style={S.sub}>
-        Logistic Regression · ROC-AUC 0.84 · served via FastAPI (5001) behind an Express gateway (5000)
+        Logistic Regression · ROC-AUC 0.84 · served via FastAPI on Render
       </p>
 
       <form onSubmit={submit} style={S.form}>
